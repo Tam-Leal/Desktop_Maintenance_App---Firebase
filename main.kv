@@ -1,0 +1,244 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+ScreenManager:
+    WindowSignin:
+    WindowSignup:
+    WindowMain:
+
+<ListItemWithCheckbox>:
+    id:liwc
+
+    IconLeftWidget:
+        icon: root.icon
+
+    RightCheckbox:
+        id: rcb
+
+
+<WindowSignin>:
+    id: signin
+    name:"signin"
+    MDFloatLayout:
+        Image:
+            id: gif
+            source: './assets/gif.gif'
+            pos_hint: {'center_x':.5,'center_y':.80}
+            size_hint: None, None
+            size: dp(180), dp(180)
+            anim_delay: .05
+            anim_loop: 50
+            anim_reset: True
+        
+        MDTextField:
+            id: user_email
+            mode: "rectangle"
+            icon_left: "email"
+            hint_text: "Email"
+            pos_hint: {'center_x': .5, 'center_y': .55}
+            size_hint: None,None
+            width: "250dp"
+            user_size: "36dp"
+
+        MDTextFieldRound:
+            id: user_password
+            mode: "rectangle"
+            icon_left: "key"
+            hint_text: "Password"
+            password: True
+            pos_hint: {'center_x': .5, 'center_y': .42}
+            size_hint: None,None
+            width: "250dp"
+            user_size: "36dp"
+
+        MDIconButton:
+            id: btn_show
+#            text: "show"
+            icon: "eye"
+            pos_hint: {"center_x":.68,"center_y":.415}
+            background_color: 0,0,0,0
+            opacity: .3
+            on_press : app.toggle()
+            font_size: "14dp"
+
+        MDFillRoundFlatButton:
+            id: flatbutton
+            pos_hint: {"center_x":.5,"center_y":.25}
+            text:"Enter"
+            size_hint: .5,None
+            theme_text_color: "Custom"
+            md_bg_color: .9, 0, .8, 1
+            on_press:
+                app.database_login()
+                app.admin()
+
+        MDTextButton:
+            text: "Sign up"
+            halign: "center"
+            text: "Sign Up"
+            theme_text_color: "Custom"
+            text_color: .9, 0, .8, 1
+            pos_hint: {'center_x': .65, 'center_y': .1}
+            on_release:
+                app.root.current = "signup"
+                root.manager.transition.direction = "left"
+        
+        MDLabel:
+            text: "Dont have an Account ?"
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            pos_hint: {'center_x': .8, 'center_y': .1}
+
+<WindowSignup>:
+    name: "signup"
+    Image:
+        source: './assets/signup.png'
+        pos_hint: {'center_x':.5,'center_y':.85}
+        allow_stretch: True
+        size_hint: None, None
+        size: dp(170), dp(170)
+
+    MDTextField:
+        id: name_register
+        mode: "rectangle"
+        icon_left: "account-circle-outline"
+        hint_text: "Name"
+        pos_hint: {'center_x': .5, 'center_y': .68}
+        size_hint: None,None
+        width: "220dp"
+        user_size: "36dp"
+
+    MDTextField:
+        id: sector_register
+        mode: "rectangle"
+        icon_left: "factory"
+        hint_text: "Sector"
+        pos_hint: {'center_x': .5, 'center_y': .56}
+        size_hint: None,None
+        width: "220dp"
+        user_size:"36dp"
+
+    MDTextField:
+        id: email_register
+        mode: "rectangle"
+        icon_left: "email"
+        hint_text: "Email"
+        pos_hint: {'center_x': .5, 'center_y': .44}
+        size_hint: None,None
+        width: "220dp"
+        user_size:"36dp"
+
+    MDTextField:
+        id: password_register
+        mode: "rectangle"
+        icon_left: "key"
+        hint_text: "Password"
+        pos_hint: {'center_x': .5, 'center_y': .32}
+        size_hint: None,None
+        width: "220dp"
+        user_size: "36dp"
+
+    MDFillRoundFlatButton:
+        id: register_btn
+        text: "Register"
+        size_hint: .3, None
+        theme_text_color: "Custom"
+        md_bg_color: .9, 0, .8, 1
+        pos_hint: {"center_x":.7,"center_y": .10}
+        on_release:
+            app.show_alert_dialog()
+            app.signup_register()
+
+    MDFillRoundFlatButton:
+        id: back_btn
+        text: "Back"
+        size_hint: .3, None
+        theme_text_color: "Custom"
+        md_bg_color: .5, .5, .5, 1
+        pos_hint: {"center_x":.3,"center_y": .10}
+        on_release:
+            app.root.current = "signin"
+            root.manager.transition.direction = "right"
+
+<WindowMain>:
+    name: "main"
+    MDBottomNavigation:
+        panel_color: get_color_from_hex("#eeeaea")
+        selected_color_background: get_color_from_hex("#97ecf8")
+        text_color_active: 0.7, 0, 1, 1
+
+        MDBottomNavigationItem:
+            name: 'screen1'
+            id: tela1
+            text: 'Order'
+            icon: 'file-document'
+
+            MDIconButton:
+                id: icon_quit
+                icon: "exit-to-app"
+                pos_hint: {"center_x": .9, "center_y": .9}
+                user_font_size : "28sp"
+                md_bg_color: get_color_from_hex("#f7f2fa")
+                on_release:
+                    app.back_home()
+
+            MDLabel:
+                id: label_welcome
+                halign: 'center'
+                pos_hint: {"center_x":.3,"center_y":.9}
+
+            MDLabel:
+                id: label_issues
+                text: 'Select your issue'
+                halign: 'center'
+                pos_hint: {"center_x":.5,"center_y":.8}
+
+            MDTextField:
+                id: field_issue
+                pos_hint: {'center_x': .5, 'center_y': .7}
+                size_hint_x: None
+                width: "200dp"
+                hint_text: "Issue"
+                on_focus: if self.focus: app.menu.open()
+
+            MDTextField:
+                id: field_describe
+                multiline: True
+                mode: "rectangle"
+                hint_text: "Describe your issue:"
+                size_hint: None,.3
+                width: "250dp"
+                pos_hint: {'center_x': .5, 'center_y': .42}
+
+            MDFillRoundFlatButton:
+                id: send_request
+                text: "Send"
+                size_hint: .4, None
+                theme_text_color: "Custom"
+                md_bg_color: .7, 0, 1, 1
+                pos_hint: {"center_x":.5,"center_y": .15}
+                on_release:
+                    app.requests()
+
+        MDBottomNavigationItem:
+            id: tela2
+            name: 'screen2'
+            text: 'Queue'
+            icon: 'human-queue'
+            on_tab_press:
+                app.queue()
+            ScrollView:
+                id: scroll
+                MDList:
+                    id: container
+
+        MDBottomNavigationItem:
+            id: tela3
+            name: 'screen3'
+            text: 'Historic'
+            icon: 'clipboard-file'
+            disabled:True
+            on_tab_press:
+                app.graph()
+            MDBoxLayout:
+                id: box
+                size_hint_y: .8
+                pos_hint: {"top":1}
