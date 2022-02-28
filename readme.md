@@ -163,7 +163,7 @@ Edit the rules to:
     }        
 }
 ````
-**Note: To configure the app admin, change the ```theauth.token.email == 'admin@mycompany.com'``` from read and write to the email that will be the admin created in ```Authentication```**
+**Note: To configure the app admin, change the ```auth.token.email == 'admin@mycompany.com'``` from read and write to the email that will be the admin created in ```Authentication```**
 
 For more information about firebase rules, see: [https://firebase.google.com/docs/database/security](https://firebase.google.com/docs/database/security "optional-title")
 
