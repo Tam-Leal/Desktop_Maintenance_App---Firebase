@@ -156,9 +156,9 @@ Edit the rules to:
       
       "admin":{
         	// Allow only authenticated admin access to data
-        	// set the email from de admin user'
-        ".read":"auth != null && auth.token.email == 'admin@admin.com' ",
-        ".write":"auth != null && auth.token.email == 'admin@admin.com' "
+        	// put the email that will be the administrator. Example:
+        ".read":"auth != null && auth.token.email == 'admin@mycompany.com' ",
+        ".write":"auth != null && auth.token.email == 'admin@mycompany.com' "
         }
     }        
 }
