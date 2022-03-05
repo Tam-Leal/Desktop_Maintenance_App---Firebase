@@ -20,7 +20,7 @@ from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.list import ThreeLineIconListItem
 from kivy.properties import StringProperty
-from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
+from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg  # noqa
 from kivy.resources import resource_add_path
 from kivymd.uix.dialog import MDDialog
 from datetime import date
